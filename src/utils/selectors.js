@@ -12,6 +12,8 @@ module.exports = {
   gamePage: {
     startGameButton: "#screenGame .start button",
     finishGameButton: "#screenGame .content button:not(.disable)",
+    isAbleToFillAnswers: "#screenGame .answers",
+    isAbleToFinish: "#screenGame .time-auto",
   },
 
   components: {

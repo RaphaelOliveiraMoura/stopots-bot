@@ -1,8 +1,13 @@
 const BrowserPage = require("../global/BrowserPage");
+const selectors = require("../utils/selectors");
 const topicContentTable = require("../utils/words");
 
 module.exports = async function () {
   const page = await BrowserPage.getInstance();
+
+  await page.waitForSelector(selectors.gamePage.isAbleToFillAnswers, {
+    timeout: 500000,
+  });
 
   await page.evaluate((topicContentTable) => {
     var nativeInputValueSetter = Object.getOwnPropertyDescriptor(
