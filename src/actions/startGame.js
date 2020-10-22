@@ -1,5 +1,6 @@
 const waitAndClick = require("../utils/waitAndClick");
+const selectors = require("../utils/selectors");
 
 module.exports = async function () {
-  await waitAndClick("#screenGame .start button");
+  await waitAndClick(selectors.gamePage.startGameButton);
 };

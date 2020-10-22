@@ -5,6 +5,8 @@ const startGame = require("./actions/startGame");
 const fillGameInputs = require("./actions/fillGameInputs");
 const finishGame = require("./actions/finishGame");
 
+const timing = require("./utils/timing");
+
 exports.run = async function run() {
   const page = await BrowserPage.getInstance();
 
@@ -14,12 +16,12 @@ exports.run = async function run() {
   console.info("Starting game...");
   await startGame();
 
-  await page.waitFor(8000);
+  await page.waitForTimeout(timing.selectingLetterTiming);
 
   console.info("Filling game fields...");
   await fillGameInputs();
 
-  await page.waitFor(25000);
+  await page.waitForTimeout(timing.finishGameTiming);
 
   console.info("Finishing game...");
   await finishGame();

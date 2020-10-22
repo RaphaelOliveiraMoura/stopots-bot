@@ -8,7 +8,7 @@ module.exports = async function waitAndClick(
 
   const element = await page.waitForSelector(selector);
 
-  await page.waitFor(delay);
+  await page.waitForTimeout(delay);
 
   element.click();
 };

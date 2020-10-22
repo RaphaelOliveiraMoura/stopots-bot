@@ -1,23 +1,21 @@
 const BrowserPage = require("../global/BrowserPage");
 const waitAndClick = require("../utils/waitAndClick");
-
-const stopotsUrl = "https://stopots.com";
+const selectors = require("../utils/selectors");
+const { botName, stopotsGameUrl } = require("../global/configs");
 
 module.exports = async function () {
   const page = await BrowserPage.getInstance();
-  await page.goto(`${stopotsUrl}/pt`);
+  await page.goto(`${stopotsGameUrl}/pt`);
 
-  await waitAndClick("form button");
+  await waitAndClick(selectors.landingPage.joinAnonymousButton);
 
-  await page.waitFor(1000);
-
-  const nameInput = await page.waitForSelector("#screenHome input");
+  const nameInput = await page.waitForSelector(selectors.homePage.nameInput);
   for (let index = 0; index < 15; index++) {
     await nameInput.press("Backspace");
   }
-  await nameInput.type("Botizin =)", { delay: 200 });
+  await nameInput.type(botName, { delay: 200 });
 
-  await waitAndClick("#screenHome .actions .icon-gear");
-  await waitAndClick("#screenCreate .actions button");
-  await waitAndClick("#popup button.close");
+  await waitAndClick(selectors.homePage.createRoomButton);
+  await waitAndClick(selectors.createRoomPage.createRoomButton);
+  await waitAndClick(selectors.components.popout.closeButton);
 };

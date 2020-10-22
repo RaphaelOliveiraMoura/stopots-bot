@@ -5,11 +5,14 @@ module.exports = async function () {
   const page = await BrowserPage.getInstance();
 
   await page.evaluate((topicContentTable) => {
+    var nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+      window.HTMLInputElement.prototype,
+      "value"
+    ).set;
+
     var letter = document
       .getElementById("letter")
       .lastChild.textContent.toLowerCase();
-
-    console.log(`Current letter ${letter}`);
 
     var labels = [...document.querySelectorAll(".content label")];
 
@@ -19,13 +22,6 @@ module.exports = async function () {
 
       return { topic, input };
     });
-
-    console.log({ inputsMapping });
-
-    var nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-      window.HTMLInputElement.prototype,
-      "value"
-    ).set;
 
     function fillInput({ topic, input }) {
       const setDefaultValue =
