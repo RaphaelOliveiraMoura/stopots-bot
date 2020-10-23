@@ -1,18 +1,19 @@
-const BrowserPage = require("../global/BrowserPage");
+import BrowserPage from "../global/BrowserPage";
 const waitAndClick = require("../utils/waitAndClick");
 const selectors = require("../utils/selectors");
 const { botName, stopotsGameUrl } = require("../global/configs");
 
-module.exports = async function () {
+export default async () => {
   const page = await BrowserPage.getInstance();
   await page.goto(`${stopotsGameUrl}/pt`);
-
   await waitAndClick(selectors.landingPage.joinAnonymousButton);
 
   const nameInput = await page.waitForSelector(selectors.homePage.nameInput);
+
   for (let index = 0; index < 15; index++) {
     await nameInput.press("Backspace");
   }
+
   await nameInput.type(botName, { delay: 200 });
 
   await waitAndClick(selectors.homePage.createRoomButton);
