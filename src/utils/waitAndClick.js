@@ -1,6 +1,6 @@
-const BrowserPage = require("../global/BrowserPage");
+import BrowserPage from '../global/BrowserPage';
 
-module.exports = async function waitAndClick(
+export default async function waitAndClick(
   selector,
   { delay } = { delay: 2000 }
 ) {
@@ -11,4 +11,4 @@ module.exports = async function waitAndClick(
   await page.waitForTimeout(delay);
 
   element.click();
-};
+}

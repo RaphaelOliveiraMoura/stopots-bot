@@ -1,6 +1,6 @@
-const waitAndClick = require("../utils/waitAndClick");
-const selectors = require("../utils/selectors");
+import waitAndClick from '../utils/waitAndClick';
+import selectors from '../utils/selectors';
 
-module.exports = async function () {
+export default async function startGame() {
   await waitAndClick(selectors.gamePage.startGameButton);
-};
+}

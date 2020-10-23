@@ -1,18 +1,20 @@
-const createNewRoom = require("./actions/createNewRoom");
-const startGame = require("./actions/startGame");
-const fillGameInputs = require("./actions/fillGameInputs");
-const finishGame = require("./actions/finishGame");
+/* eslint-disable no-console */
+
+import createNewRoom from './actions/createNewRoom';
+import startGame from './actions/startGame';
+import fillGameInputs from './actions/fillGameInputs';
+import finishGame from './actions/finishGame';
 
 exports.run = async function run() {
-  console.info("Creating room...");
+  console.log('Creating room...');
   await createNewRoom();
 
-  console.info("Starting game...");
+  console.log('Starting game...');
   await startGame();
 
-  console.info("Filling game fields...");
+  console.log('Filling game fields...');
   await fillGameInputs();
 
-  console.info("Finishing game...");
+  console.log('Finishing game...');
   await finishGame();
 };

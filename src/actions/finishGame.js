@@ -1,7 +1,7 @@
-const BrowserPage = require("../global/BrowserPage");
-const selectors = require("../utils/selectors");
+import BrowserPage from '../global/BrowserPage';
+import selectors from '../utils/selectors';
 
-module.exports = async function () {
+export default async function finishGame() {
   const page = await BrowserPage.getInstance();
 
   await page.waitForSelector(selectors.gamePage.isAbleToFinish, {
@@ -9,4 +9,4 @@ module.exports = async function () {
   });
 
   await page.click(selectors.gamePage.finishGameButton);
-};
+}

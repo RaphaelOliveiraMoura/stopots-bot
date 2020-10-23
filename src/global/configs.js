@@ -1,4 +1,7 @@
-module.exports = {
-  stopotsGameUrl: "https://stopots.com",
-  botName: "Botizin =)",
+export const stopotsGameUrl = 'https://stopots.com';
+export const botName = 'Botizin =)';
+
+export default {
+  stopotsGameUrl,
+  botName,
 };

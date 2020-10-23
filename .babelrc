@@ -1,0 +1,4 @@
+{
+  "presets": [["@babel/env", { "targets": { "node": 12 } }]],
+  "plugins": []
+}
