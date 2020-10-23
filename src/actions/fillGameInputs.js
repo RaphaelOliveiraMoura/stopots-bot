@@ -1,8 +1,8 @@
-const BrowserPage = require("../global/BrowserPage");
-const selectors = require("../utils/selectors");
-const topicContentTable = require("../utils/words");
+import BrowserPage from '../global/BrowserPage';
+import selectors from '../utils/selectors';
+import words from '../utils/words';
 
-module.exports = async function () {
+export default async function fillGameInputs() {
   const page = await BrowserPage.getInstance();
 
   await page.waitForSelector(selectors.gamePage.isAbleToFillAnswers, {
@@ -10,18 +10,18 @@ module.exports = async function () {
   });
 
   await page.evaluate((topicContentTable) => {
-    var nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
       window.HTMLInputElement.prototype,
-      "value"
+      'value'
     ).set;
 
-    var letter = document
-      .getElementById("letter")
+    const letter = document
+      .getElementById('letter')
       .lastChild.textContent.toLowerCase();
 
-    var labels = [...document.querySelectorAll(".content label")];
+    const labels = [...document.querySelectorAll('.content label')];
 
-    var inputsMapping = labels.map((label) => {
+    const inputsMapping = labels.map((label) => {
       const topic = label.firstChild.innerText.toLowerCase();
       const input = label.lastChild;
 
@@ -32,7 +32,7 @@ module.exports = async function () {
       const setDefaultValue =
         !topicContentTable[topic] ||
         !topicContentTable[topic][letter] ||
-        topicContentTable[topic][letter] === "-";
+        topicContentTable[topic][letter] === '-';
 
       const defaultValue = `${letter}${letter}`;
 
@@ -42,10 +42,10 @@ module.exports = async function () {
 
       nativeInputValueSetter.call(input, value);
 
-      const event = new Event("input", { bubbles: true });
+      const event = new Event('input', { bubbles: true });
       input.dispatchEvent(event);
     }
 
     inputsMapping.forEach(fillInput);
-  }, topicContentTable);
-};
+  }, words);
+}
